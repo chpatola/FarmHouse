@@ -1,0 +1,69 @@
+
+package maatila;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class Maatila implements Eleleva{
+    private String omistaja;
+    private Navetta mynavetta;
+    private List<Lehma> mycows;
+    
+    public Maatila(String omistaja, Navetta navetta){
+        this.omistaja= omistaja;
+        this.mynavetta= navetta;
+        this.mycows = new ArrayList<>();
+    }
+
+    public void lisaaLehma(Lehma lehma) {
+        mycows.add(lehma);
+    }
+    public void hoidaLehmat(){
+        mycows.stream()
+                .forEach(ko -> mynavetta.hoida(ko));
+    }
+    
+
+    @Override
+    public void eleleTunti() {
+       mycows.stream()
+               .forEach(cow -> cow.eleleTunti());
+    }
+
+    public String getOmistaja() {
+        return omistaja;
+    }
+    
+
+    @Override
+    public String toString() {
+        String ord ="";
+        String navettastatus =  mynavetta.toString();
+        return ord + "Maatilan omistaja: "+ omistaja +"\n"+ "Navetan maitosäiliö: "+navettastatus+"\n"+noCow();
+    }
+    public String noCow(){
+        if(mycows.isEmpty()){
+             String ord ="";
+            return ord + "Ei lehmiä.";
+        }
+        StringBuilder stringe = new StringBuilder();
+        String kor = "Lehmät:";
+        stringe.append(kor);
+        stringe.append("\n");
+        for(Lehma ko :mycows){
+            stringe.append("\t");
+            stringe.append(ko);
+            stringe.append("\n");
+        }
+        
+        return stringe.toString();
+    }
+
+    public void asennaNavettaanLypsyrobotti(Lypsyrobotti robo) {
+        this.mynavetta.asennaLypsyrobotti(robo);
+    }
+    
+    
+    
+}
