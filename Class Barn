@@ -1,0 +1,46 @@
+
+package maatila;
+
+import java.text.DecimalFormat;
+import java.util.List;
+
+
+public class Navetta {
+    private Lypsyrobotti lypsare;
+    private Maitosäiliö maitore;
+    
+    public Navetta(Maitosäiliö maitosailio){
+        this.lypsare =  null;
+        this.maitore = maitosailio;
+              
+    }
+    
+    public Maitosäiliö getMaitosäiliö(){
+        return this.maitore;
+    }
+    public void asennaLypsyrobotti(Lypsyrobotti lypsyrobotti){
+        this.lypsare =lypsyrobotti;
+         lypsare.setMaitosailio(this.maitore);
+    }
+    public void hoida(Lehma lehma) {
+        if(lypsare==null){
+            throw new IllegalStateException();
+        }
+        lypsare.lypsa(lehma);
+    }
+    public void hoida(List<Lehma> lehmat) {
+        if(lypsare==null){
+            throw new IllegalStateException();
+        }
+        lehmat.stream()
+                .forEach(ko -> lypsare.lypsa(ko));
+    }
+
+    @Override
+    public String toString() {
+        DecimalFormat df = new DecimalFormat("###.#");
+        String content ="";
+        return content + df.format(maitore.getSaldo())+ "/"+maitore.getTilavuus();
+    }
+    
+}
