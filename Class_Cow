@@ -1,0 +1,66 @@
+package maatila;
+import com.sun.org.apache.bcel.internal.generic.SALOAD;
+import java.text.DecimalFormat;
+import java.util.Random;
+
+
+public class Lehma implements Lypsava, Eleleva{
+    private String nimi;
+    private double utareetTila;
+    private double utareetSaldo;
+    
+    
+    private static final String[] NIMIA = new String[]{
+    "Anu", "Arpa", "Essi", "Heluna", "Hely",
+    "Hento", "Hilke", "Hilsu", "Hymy", "Matti", "Ilme", "Ilo",
+    "Jaana", "Jami", "Jatta", "Laku", "Liekki",
+    "Mainikki", "Mella", "Mimmi", "Naatti",
+    "Nina", "Nyytti", "Papu", "Pullukka", "Pulu",
+    "Rima", "Soma", "Sylkki", "Valpu", "Virpi"};
+    
+    String test = NIMIA[new Random().nextInt(NIMIA.length)];
+    
+    public Lehma(){;
+        this.nimi= test;
+        this.utareetTila= 15 + new Random().nextInt(26);
+    }
+     public Lehma(String nimi){
+        Random rade = new Random();
+        this.nimi= nimi;
+        this.utareetTila= 15 + new Random().nextInt(26);
+    }
+
+    public String getNimi() {
+        return nimi;
+    }
+    public double getTilavuus(){
+        return utareetTila;
+    }
+    public double getMaara(){
+        return utareetSaldo;
+    }
+
+    @Override
+    public String toString() {
+        DecimalFormat df = new DecimalFormat("###.#");
+       
+        String toprint ="";
+        return toprint+nimi+" "+df.format(utareetSaldo)+"/"+utareetTila;
+    }
+
+    @Override
+    public double lypsa() {
+        double milk = utareetSaldo;
+        this.utareetSaldo=0;
+       return milk;
+    }
+
+    @Override
+    public void eleleTunti() {
+        Random rade = new Random();    
+        this.utareetSaldo= this.utareetSaldo+ (rade.nextDouble()+0.9);
+        
+    }
+    
+    
+}
