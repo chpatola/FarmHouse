@@ -1,0 +1,31 @@
+package maatila;
+
+public class Lypsyrobotti {
+    private Maitosäiliö msailio;
+    
+    public Lypsyrobotti(){
+        this.msailio = null;
+        
+    }
+    public Maitosäiliö getMaitosailio() {
+        if(this.msailio==null){
+            return null;
+        }
+       return msailio;
+    }
+    public void setMaitosailio(Maitosäiliö maitosailio) {
+        this.msailio =maitosailio;
+    }
+    public void lypsa(Lypsava lypsava) {
+        if(this.msailio==null){
+            System.out.println("Maidot menevät hukkaan!");
+        }
+        else{
+             msailio.lisaaSailioon(lypsava.lypsa());
+        }
+     
+    }
+
+    
+    
+}
